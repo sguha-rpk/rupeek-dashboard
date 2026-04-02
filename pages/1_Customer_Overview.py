@@ -15,7 +15,7 @@ st.sidebar.header("Filters")
 gl_filter = st.sidebar.selectbox("GL Type", ["All", "Consumption", "IG"])
 loan_mode = st.sidebar.selectbox("Loan Mode", ["All", "Solo RCPL", "Co-lending"])
 ticket_labels = [t[0] for t in TICKET_SIZE_RANGES]
-ticket_filter = st.sidebar.selectbox("Ticket Size (Total Principal)", ticket_labels)
+ticket_filter = st.sidebar.selectbox("Ticket Size (Total Outstanding)", ticket_labels)
 
 # Apply loan-level filters
 filtered = df.copy()
@@ -42,8 +42,8 @@ agg = compute_customer_aggregates(filtered)
 # Apply ticket size filter
 ticket_range = next(t for t in TICKET_SIZE_RANGES if t[0] == ticket_filter)
 agg = agg[
-    (agg["total_rcpl_principal"] >= ticket_range[1])
-    & (agg["total_rcpl_principal"] < ticket_range[2])
+    (agg["total_current_outstanding"] >= ticket_range[1])
+    & (agg["total_current_outstanding"] < ticket_range[2])
 ]
 
 # Apply search
