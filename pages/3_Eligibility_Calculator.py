@@ -183,9 +183,9 @@ for idx, (sid, col) in enumerate(zip(scenarios, scenario_cols)):
 
         # Aggregate
         st.markdown(
-            f"**Aggregate Principal:** ₹{r['aggregate_principal']:,.0f}  \n"
+            f"**Aggregate Outstanding:** ₹{r['aggregate_outstanding']:,.0f}  \n"
             f"**Max Allowed LTV:** {r['max_allowed_ltv_pct']:.0f}% "
-            f"({get_ltv_bracket_label(r['aggregate_principal'])})"
+            f"({get_ltv_bracket_label(r['aggregate_outstanding'])})"
         )
 
         st.markdown("---")

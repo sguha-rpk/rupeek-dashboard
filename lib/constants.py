@@ -20,17 +20,19 @@ TICKET_SIZE_RANGES = [
 ]
 
 
-def get_max_ltv(aggregate_principal: float) -> float:
+def get_max_ltv(aggregate_outstanding: float) -> float:
+    """Get max allowed LTV based on aggregate outstanding amount."""
     for limit, ltv in LTV_BRACKETS:
-        if aggregate_principal < limit:
+        if aggregate_outstanding < limit:
             return ltv
     return LTV_BRACKETS[-1][1]
 
 
-def get_ltv_bracket_label(aggregate_principal: float) -> str:
-    if aggregate_principal < 250_000:
+def get_ltv_bracket_label(aggregate_outstanding: float) -> str:
+    """Get human-readable bracket label based on aggregate outstanding."""
+    if aggregate_outstanding < 250_000:
         return "< 2.5L (85%)"
-    elif aggregate_principal <= 500_000:
+    elif aggregate_outstanding <= 500_000:
         return "2.5L - 5L (80%)"
     else:
         return "> 5L (75%)"
